@@ -1,0 +1,30 @@
+
+const int potPin = A0;      // Analog input pin for the potentiometer
+const int motorPin = 9;     // Digital output pin for the motor (PWM pin)
+
+void setup() {
+  // Motor setup
+  pinMode(motorPin, OUTPUT);
+
+  // Serial monitor setup
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the value from the potentiometer
+  int potValue = analogRead(potPin);
+
+  // Map the potentiometer value to the motor speed range (0-255)
+  int motorSpeed = map(potValue, 0, 1023, 0, 255);
+
+  // Control the motor speed
+  analogWrite(motorPin, motorSpeed);
+
+  // Print the potentiometer value and motor speed to the serial monitor
+  Serial.print("Potentiometer Value: ");
+  Serial.print(potValue);
+  Serial.print("  Motor Speed: ");
+  Serial.println(motorSpeed);
+
+  delay(100);  // Add a small delay for stability
+}
